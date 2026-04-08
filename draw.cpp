@@ -12,7 +12,56 @@ typedef struct card{
     int value;
 }card;
 
+class Hand {
+    protected:
+     vector<card> hand;
+     int score=0;
+     int ace_count=0;
+     int balance;
+    public:
+        card get_card(){
+            return hand[0];
+        }
+        int get_score(){
+            return score;
+        }
+        void add_card( card c) {
+            hand.push_back(c);
+            score+=c.value;
+            if(c.name_card == "A")
+        ace_count++;
 
+    while(score > 21 && ace_count > 0)
+    {
+        score -= 10;
+        ace_count--;
+    }
+            //cout<<player_card[0].name_card;
+        }
+        vector<card> get_all_card(){
+            return hand;
+        }
+        bool is_bust(){
+            return score>21;
+        }
+        bool is_black_jack(){
+            return (hand[0].value ==10 && hand[1].value==11)||((hand[0].value ==11 && hand[1].value==10));
+        }
+        void clear_hand(){
+            hand.clear();
+            score=0;
+            ace_count=0;
+        }
+        bool same_two_card(){
+            return (hand[0].name_card==hand[1].name_card)&&hand.size()==2;
+        }
+        card pop_card(){
+            card c=hand.back();
+            score=score-c.value;
+            hand.pop_back();
+            return c;
+        }
+};
 class Deck {
     protected:
     vector<card> deck;
@@ -76,24 +125,7 @@ class Deck {
         // deck.push_back({"J","Clubs",10});
         // deck.push_back({"Q","Clubs",10});
         // deck.push_back({"K","Clubs",10});
-            deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
+
         }
         void show_card(){
             for (int i=0;i<deck.size();i++){
@@ -109,56 +141,6 @@ class Deck {
             return c;
         }
         
-};
-class Hand {
-    protected:
-     vector<card> hand;
-     int score=0;
-     int ace_count=0;
-     int balance;
-    public:
-        card get_card(){
-            return hand[0];
-        }
-        int get_score(){
-            return score;
-        }
-        void add_card( card c) {
-            hand.push_back(c);
-            score+=c.value;
-            if(c.name_card == "A")
-        ace_count++;
-
-    while(score > 21 && ace_count > 0)
-    {
-        score -= 10;
-        ace_count--;
-    }
-            //cout<<player_card[0].name_card;
-        }
-        vector<card> get_all_card(){
-            return hand;
-        }
-        bool is_bust(){
-            return score>21;
-        }
-        bool is_black_jack(){
-            return (hand[0].value ==10 && hand[1].value==11)||((hand[0].value ==11 && hand[1].value==10));
-        }
-        void clear_hand(){
-            hand.clear();
-            score=0;
-            ace_count=0;
-        }
-        bool same_two_card(){
-            return (hand[0].name_card==hand[1].name_card)&&hand.size()==2;
-        }
-        card pop_card(){
-            card c=hand.back();
-            score=score-c.value;
-            hand.pop_back();
-            return c;
-        }
 };
 class Player {
     private:
@@ -288,20 +270,20 @@ int get_bet_amount(Player player){
         return bet_amount;
 }
 void deal_initial_cards(Player &player, Deck &d,Dealer &dealer,int num_of_hands){
-    // cout<<"-----------------------------"<<endl;
-    // cout<<"Your balance: "<<player.get_balance()<<endl;
+    cout<<"-----------------------------"<<endl;
+    cout<<"Your balance: "<<player.get_balance()<<endl;
     player.add_card(d.draw(),num_of_hands);
     dealer.add_card(d.draw());
     player.add_card(d.draw(),num_of_hands);
     dealer.add_card(d.draw());
-    //cout<<"Your cards"<<endl;
-    //player.show_card(num_of_hands);
+    cout<<"Your cards"<<endl;
+    player.show_card(num_of_hands);
     //cout<<"Hand:"<<player.get_hands();
-    // for (int i=0;i<player.get_hands();i++){
-    // cout<<"\nScore:"<<player.get_score(i);
+    for (int i=0;i<player.get_hands();i++){
+    cout<<"\nScore:"<<player.get_score(i);
     
-    // cout<<endl;
-    // }
+    cout<<endl;
+    }
 }
 bool check_blackjack(Dealer dealer,Player &player,int bet_amount){
     for (int i=0;i<player.get_hands();i++){
@@ -329,38 +311,20 @@ bool check_blackjack(Dealer dealer,Player &player,int bet_amount){
 }
 void player_turn(Player &player,Deck &d,Dealer dealer){
     
-    
+    int selection;
+    cout<<"Dealer card: ";
+        cout<<dealer.show_a_card().name_card<<" "<<dealer.show_a_card().type_card <<endl;
         int i=0;
+    
     while (i<player.get_hands()){
-        int selection;
-        
         if (!player.is_black_jack(i)){
         int maxOption = 2;
         cout<<"-----------------------------"<<endl;
-        cout<<"Your balance: "<<player.get_balance()<<endl;
         cout<<"Dealer card: ";
         cout<<dealer.show_a_card().name_card<<endl;
-         for (int j=0;j<player.get_hands();j++){
-           
-            if (!player.is_bust(j)&&i==j){
-                 cout<<"Hand "<<j+1<<":\t<------CURRENT\n";
-            }
-            else if (i<j){
-                cout<<"Hand "<<j+1<<": Waiting\n";
-            }
-            else if (i>j&& !player.is_bust(j)){
-                cout<<"Hand "<<j+1<<": Waiting for the dealer turn\n";
-            }
-            else {
-                cout<<"Hand "<<j+1<<": Bust\n";
-            }
-            
-            player.show_card(j);
-            cout<<"\nScore:"<<player.get_score(j);
-            cout<<endl;
-         }
-         cout<<"\n-----------------------------"<<endl;
-        cout<<"\n1.Hit\n";
+         cout<<"Hand "<<i+1<<":\n";
+         player.show_card(i);
+        cout<<"\n1.Draw more\n";
         cout<<"2.Skip\n";
         if (player.can_split(i)){
             cout<<"3.Split\n";
@@ -370,6 +334,8 @@ void player_turn(Player &player,Deck &d,Dealer dealer){
             cout<<"You should draw more\n";
         }
         do{
+            
+          
         cout<<"\nHand "<<i+1<<" chosing...\n";
         cout<<"Your selection: ";
         cin>>selection;
@@ -378,31 +344,29 @@ void player_turn(Player &player,Deck &d,Dealer dealer){
         continue;
     }
 
-        }while((selection < 1 || selection > maxOption));
+        }while(selection < 1 || selection > maxOption);
         cout<<"-----------------------------"<<endl;
-        //cout<<"Selection:"<<selection<<endl;
         switch (selection)
         {
         case 1:
-            //cout<<"i="<<i<<endl;    
             player.add_card(d.draw(),i);
+            cout<<"Hand "<<i+1<<":"<<endl;
+            player.show_card(i);
+           // cout<<player.is_bust(i);
+            cout<<"\nScore:"<<player.get_score(i);
              if (player.is_bust(i)) {
+            cout << "BUST!\n";
             i++;
-             }
-        
-            system("cls");
+        }
             cout<<endl;
             break;
         case 2:
             i++;
-            system("cls");
             break;
         case 3:
            player.get_card_from_hand(i);
             cout<<"Splited\n";
             cout<<"\nYou have "<<player.get_hands()<<endl;
-            system("cls");
-            break;
         }
 }
          else {
@@ -456,7 +420,6 @@ void Play_game(Player &player){
             if (player.get_balance() >0)
                 {
                 int bet_amount=get_bet_amount(player);
-                system("cls");
                 Deck d;
                 Dealer dealer;
                 Hand player_hand;
@@ -550,7 +513,6 @@ void deposit(Player &player){
     cin>>choose_menu;
     switch(choose_menu){
         case 1:
-        system("cls");
         Play_game(player);
         break;
         case 2:

@@ -1,7 +1,8 @@
 #include<iostream>
 #include<vector>
-#include <algorithm>
+//#include <algorithm>
 #include <random>
+#include<math.h>
 //#include <cstdlib>
 #include <ctime>
 
@@ -16,6 +17,7 @@ typedef struct card{
 class Deck {
     private:
     vector<card> deck;
+    vector <card> discard_tray;
 
     public:
         Deck(){
@@ -76,6 +78,8 @@ class Deck {
         deck.push_back({"J","Clubs",10});
         deck.push_back({"Q","Clubs",10});
         deck.push_back({"K","Clubs",10});
+
+        
         }
         void show_card(){
             for (int i=0;i<deck.size();i++){
@@ -96,6 +100,9 @@ class Deck {
         //      deck.erase(deck.begin()+r);
         //     return c;
         // }
+        void take_card_back(card card){
+            discard_tray.push_back(card);
+        }
         
 };
 class Hand {
@@ -103,7 +110,7 @@ class Hand {
      vector<card> hand;
      int score=0;
      int ace_count=0;
-     int betting_amount;
+     int betting_amount=0;
      bool is_doubling_down=false;
      bool hand_is_bust=false;
     public:
@@ -116,7 +123,7 @@ class Hand {
         void set_doubling(){
             this->is_doubling_down=true;
         }
-        bool get_doubling(){
+        bool check_doubling(){
             return is_doubling_down;
         }
         int get_size_of_hand(){
@@ -153,6 +160,8 @@ class Hand {
         }
         void clear_hand(){
             hand.clear();
+            is_doubling_down=false;
+            hand_is_bust=false;
             score=0;
             ace_count=0;
         }
@@ -179,6 +188,8 @@ class Player {
         int insurance=0;
         bool surrender =false;
         double balance;
+        int totalloss=0;
+        int totalearn=0;
     public:
         Player(double balance){
             this->balance=balance;
@@ -197,12 +208,20 @@ class Player {
 }
     void reset_hand(){
         hand.clear();
+        surrender=false;
+        insurance=0;
+        totalloss=0;
+        totalearn=0;
+
     }
-        void set_balance_win(int bet_amount){
-             balance+=(bet_amount*2);
+        void set_balance(int bet_amount){
+             balance+=(bet_amount);
         }
         void take_balance (int bet_amount){
              balance-=bet_amount;
+        }
+        void update_blance_surr(){
+            this->balance=this->balance-(hand[0].getBet()/2);
         }
         void add_balance(int bet_amount){
              balance +=bet_amount;
@@ -245,6 +264,21 @@ class Player {
        }
        bool is_surr(){
         return surrender;
+       }
+       void set_loss(int loss){
+            this->totalloss+=loss;
+       }
+       void set_earn(int win){
+        this->totalearn+=win;
+       }
+       int get_loss(){
+        return totalloss;
+       }
+       int get_earn(){
+        return totalearn;
+       }
+       int get_Net(){
+        return totalearn-totalloss;
        }
 };
 class Dealer{
@@ -295,23 +329,36 @@ bool check_blackjack(Dealer dealer,Player &player,int bet_amount){
     if (dealer.get_hand().is_black_jack() && player.get_hand(0).is_black_jack()){
             show_card(dealer,player);
             cout<<"\nTie\n";
-            player.add_balance(bet_amount);
             cout<<"You get: "<<bet_amount<<endl;
+            if (player.get_insurance()>=1){
+                cout<<"\nYou win the insurance\n";
+                cout<<"You got:"<<player.get_insurance()<<" from the insurance."<<endl;
+                player.set_balance(player.get_insurance()*2);
+            }
                    return true; 
                 }
         else if (dealer.get_hand().is_black_jack()){
             show_card(dealer,player);
             cout<<"\nDealer win\n";
+            player.take_balance(player.get_hand(0).getBet());
+            cout<<"You lose hand: "<<bet_amount;
             if (player.get_insurance()>=1){
-                cout<<"You win the insurance\n";
+                cout<<"\nYou win the insurance\n";
+                cout<<"You got:"<<player.get_insurance()<<" from the insurance."<<endl;
+                player.set_balance(player.get_insurance()*2);
             }
                     return true;
                 }
         else if (player.get_hand(0).is_black_jack()){
             show_card(dealer,player);
             cout<<"\nYou Win\n";
-            player.set_balance_win(bet_amount);
-            cout<<"You get: "<<bet_amount*2<<endl;
+            player.set_balance(bet_amount*1.5);
+            cout<<"You got: "<<bet_amount*1.5<<endl;
+            if (player.get_insurance()>=1){
+                cout<<"\nYou win the insurance\n";
+                cout<<"You got:"<<player.get_insurance()<<" from the insurance."<<endl;
+                player.set_balance(player.get_insurance()*2);
+            }
                     return true;
                 }
             return false;
@@ -336,7 +383,7 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         cout<<"-----------------------------"<<endl;
         cout<<"Your balance: "<<player.get_balance()<<endl;
         cout<<"Dealer card: ";
-        cout<<dealer.get_hand().get_card().name_card<<endl;
+        cout<<dealer.get_hand().get_card().name_card<<" + ? "<<endl;
          for (int j=0;j<player.get_hands_size();j++){
            
             if (!player.get_hand(j).is_bust()&&i==j){
@@ -346,14 +393,14 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<"\tWaiting\n";
             }
             else if (i>j&& !player.get_hand(j).is_bust()){
-                if (player.get_hand(j).get_doubling()){
+                if (player.get_hand(j).check_doubling()){
                     cout<<"*";
                 }
                
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<"\tWaiting for the dealer turn\n";
             }
             else {
-                if (player.get_hand(j).get_doubling()){
+                if (player.get_hand(j).check_doubling()){
                     cout<<"*";
                 }
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<": Bust\n";
@@ -372,13 +419,12 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
     &&!(player.get_hand(i).getBet()*2 > player.get_balance()) ){
         splitOpt = option;
     cout << option++ << ".Split\n";
-            
         }
-        if (player.get_hand(i).get_size_of_hand()==2&&split_count==0){
+         if (player.get_hand(i).get_size_of_hand()==2&&split_count==0&& player.get_hand(i).getBet()!=0){
             surrOpt =option;
             cout<<option++<<".Surrender\n";
         }
-        if (player.can_double(i)&& player.get_hand(i).get_size_of_hand()==2){
+        if (player.can_double(i)&& player.get_hand(i).get_size_of_hand()==2&& player.get_hand(i).getBet()!=0){
             doubleOpt = option;
                  cout << option++ << ".Double\n";
         }
@@ -389,11 +435,6 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         cout<<"\nHand "<<i+1<<" chosing...\n";
         cout<<"Your selection: ";
         cin>>selection;
-             if (selection == 3 && !player.get_hand(i).same_two_value_card()) {
-        cout << "Invalid choice (cannot split)\n";
-        continue;
-    }
-
         }while((selection < 1 || selection > option));
         cout<<"-----------------------------"<<endl;
         //cout<<"Selection:"<<selection<<endl;
@@ -454,8 +495,13 @@ void dealer_turn(Dealer &dealer,Deck &d){
 }
 void compare_result(Dealer dealer,Player &player,int bet_amount){
     cout<<"Summaries: \n";
+    cout<<"Starting balance:"<<player.get_balance()<<endl;
     cout<<"Dealer cards:";
     dealer.get_hand().show_all_card();
+    if (player.get_insurance()>1){
+        cout<<"Losing the insurance :(("<<endl;
+        player.take_balance(player.get_insurance());
+    }
     cout<<endl;
     for (int i=0;i<player.get_hands_size();i++){
     if (dealer.get_hand().get_score()== player.get_hand(i).get_score()){
@@ -474,7 +520,19 @@ void compare_result(Dealer dealer,Player &player,int bet_amount){
         cout<<"Your Cards: ";
         player.get_hand(i).show_all_card();
         cout<<"\nHand "<<i+1<<": ";
-        cout<<"You lose: "<<player.get_hand(i).getBet();
+        
+        if (player.get_hand(i).check_doubling()){
+            player.take_balance(player.get_hand(i).getBet()*2);
+            cout<<"You lose double: "<<player.get_hand(i).getBet();
+            player.set_loss(player.get_hand(i).getBet()*2);
+
+        }
+        else {
+            player.take_balance(player.get_hand(i).getBet());
+            cout<<"You lose: "<<player.get_hand(i).getBet();
+            player.set_loss(player.get_hand(i).getBet());
+        }
+        
         cout<<"\n-----------------------------"<<endl;                
         }
     else if ((dealer.get_hand().get_score()<player.get_hand(i).get_score()) && !player.get_hand(i).is_bust()){
@@ -483,8 +541,17 @@ void compare_result(Dealer dealer,Player &player,int bet_amount){
         player.get_hand(i).show_all_card();
         cout<<"\nHand "<<i+1<<": ";
         cout<<"\n\tYou Win\n";
-        player.set_balance_win(bet_amount);
-        cout<<"You get: "<<bet_amount*2<<endl;
+        if (player.get_hand(i).check_doubling()){
+            player.set_balance(player.get_hand(i).getBet()*2);
+            cout<<"You earn double: "<<player.get_hand(i).getBet()<<" + "<<player.get_hand(i).getBet()<<endl;
+            player.set_earn(player.get_hand(i).getBet()*2);
+        }
+        else {
+           player.set_balance(player.get_hand(i).getBet());
+            cout<<"You earn: "<<bet_amount<<endl;
+            player.set_earn(player.get_hand(i).getBet());
+        }
+        
         cout<<"\n-----------------------------"<<endl;
     }
     else if (player.get_hand(i).is_bust()||(player.get_hand(i).is_bust()&&dealer.get_hand().is_bust())){
@@ -492,9 +559,19 @@ void compare_result(Dealer dealer,Player &player,int bet_amount){
         player.get_hand(i).show_all_card();
          cout<<"\nHand "<<i+1<<": ";
         cout<<"\n\tYou Lose:\n";
+        if (player.get_hand(i).check_doubling()){
+            player.take_balance(player.get_hand(i).getBet()*2);
+            cout<<"You lose double: "<<player.get_hand(i).getBet();
+            player.set_loss(player.get_hand(i).getBet()*2);
+        }
+        else {
+            player.take_balance(player.get_hand(i).getBet());
+            cout<<"You lose: "<<player.get_hand(i).getBet();
+            player.set_loss(player.get_hand(i).getBet());
+        }
              cout<<"\n-----------------------------"<<endl;
     }
-    else {
+    else { //this case for dealer bust
         //show_card(dealer,player);
         cout<<"Your Cards: ";
         player.get_hand(i).show_all_card();
@@ -502,9 +579,26 @@ void compare_result(Dealer dealer,Player &player,int bet_amount){
         cout<<"\n\tYou Win\n";
         // player.set_balance_win(bet_amount);
         // cout<<"You get: "<<bet_amount*2<<endl;
+        if (player.get_hand(i).check_doubling()){
+            player.set_balance(player.get_hand(i).getBet()*2);
+            cout<<"You earn double: "<<player.get_hand(i).getBet()<<" + "<<player.get_hand(i).getBet()<<endl;
+            player.set_earn(player.get_hand(i).getBet()*2);
+        }
+        else {
+           player.set_balance(player.get_hand(i).getBet());
+            cout<<"You earn: "<<bet_amount<<endl;
+            player.set_earn(player.get_hand(i).getBet());
+        }
+
+        
         cout<<"\n-----------------------------"<<endl;
     }
 }
+        if(player.get_hands_size()>1){
+        cout<<"\nTotal earn:"<<player.get_earn()<<endl;
+        cout<<"\nTotal loss:"<<player.get_loss()<<endl;
+        cout<<"NET:"<<player.get_Net()<<endl;
+        }
 }
 void Play_game(Player &player){
      
@@ -541,15 +635,16 @@ void Play_game(Player &player){
                         }while(insurance_betting <1 ||insurance_betting*2>player.get_hand(0).getBet()||
                     (insurance_betting+player.get_hand(0).getBet())>player.get_balance());
                         player.set_insurance(insurance_betting);
+
                     }
                 }
                 if (check_blackjack(dealer,player,player.get_hand(0).getBet())){
+                    
                     if (!ask_user_for_continue(ask_continue,player))
                             return;
                 }
                 else {
-                    if (player.get_insurance()>1)
-                    cout<<"You lose the insurance :(("<<endl;
+                    
                      player_turn(player,d,dealer,player.get_hand(0).getBet());
                      
                      if (!player.is_surr()){
@@ -558,6 +653,8 @@ void Play_game(Player &player){
                      }
                     else {
                         cout<<"You surrender\n";
+                        cout<<"You lose 50% money\n";
+                        player.update_blance_surr();
                     }
                         if(ask_user_for_continue(ask_continue,player)==false)
                             return;
@@ -566,13 +663,14 @@ void Play_game(Player &player){
                 
             }
         
-        //     else {
-        //         cout<<"-----------------------------"<<endl;
-        //         cout<<"Please deposit more money"<<endl;
-        //         cout<<"-----------------------------"<<endl;
-        //         break;
-        //     }
+            else {
+                cout<<"-----------------------------"<<endl;
+                cout<<"Please deposit more money"<<endl;
+                cout<<"-----------------------------"<<endl;
+                break;
+            }
             //cout<<"khoa";
+
          }
         
 }
@@ -605,6 +703,8 @@ void deposit(Player &player){
             }
 }
  void Menu (){
+    cout << fixed;
+cout.precision(0);
     int balance;
     int choose_menu;
     do{

@@ -14,89 +14,68 @@ typedef struct card{
 
 
 class Deck {
-    protected:
+    private:
     vector<card> deck;
 
     public:
         Deck(){
-        // deck.push_back({"A","Hearts",11});
-        // deck.push_back({"3","Hearts",3});
-        // deck.push_back({"4","Hearts",4});
-        // deck.push_back({"2","Hearts",2});
-        // deck.push_back({"3","Hearts",3});
-        // deck.push_back({"4","Hearts",4});
-        // deck.push_back({"5","Hearts",5});
-        // deck.push_back({"6","Hearts",6});
-        // deck.push_back({"7","Hearts",7});
-        // deck.push_back({"8","Hearts",8});
-        // deck.push_back({"9","Hearts",9});
-        // deck.push_back({"10","Hearts",10});
-        // deck.push_back({"J","Hearts",10});
-        // deck.push_back({"Q","Hearts",10});
-        // deck.push_back({"K","Hearts",10});
+        deck.push_back({"A","Hearts",11});
+        deck.push_back({"3","Hearts",3});
+        deck.push_back({"4","Hearts",4});
+        deck.push_back({"2","Hearts",2});
+        deck.push_back({"3","Hearts",3});
+        deck.push_back({"4","Hearts",4});
+        deck.push_back({"5","Hearts",5});
+        deck.push_back({"6","Hearts",6});
+        deck.push_back({"7","Hearts",7});
+        deck.push_back({"8","Hearts",8});
+        deck.push_back({"9","Hearts",9});
+        deck.push_back({"10","Hearts",10});
+        deck.push_back({"J","Hearts",10});
+        deck.push_back({"Q","Hearts",10});
+        deck.push_back({"K","Hearts",10});
 
-        // deck.push_back({"A","Space",11});
-        // deck.push_back({"2","Space",2});
-        // deck.push_back({"3","Space",3});
-        // deck.push_back({"4","Space",4});
-        // deck.push_back({"5","Space",5});
-        // deck.push_back({"6","Space",6});
-        // deck.push_back({"7","Space",7});
-        // deck.push_back({"8","Space",8});
-        // deck.push_back({"9","Space",9});
-        // deck.push_back({"10","Space",10});
-        // deck.push_back({"J","Space",10});
-        // deck.push_back({"Q","Space",10});
-        // deck.push_back({"K","Space",10});
+        deck.push_back({"A","Space",11});
+        deck.push_back({"2","Space",2});
+        deck.push_back({"3","Space",3});
+        deck.push_back({"4","Space",4});
+        deck.push_back({"5","Space",5});
+        deck.push_back({"6","Space",6});
+        deck.push_back({"7","Space",7});
+        deck.push_back({"8","Space",8});
+        deck.push_back({"9","Space",9});
+        deck.push_back({"10","Space",10});
+        deck.push_back({"J","Space",10});
+        deck.push_back({"Q","Space",10});
+        deck.push_back({"K","Space",10});
 
-        // deck.push_back({"A","Diamonds",11});
-        // deck.push_back({"2","Diamonds",2});
-        // deck.push_back({"3","Diamonds",3});
-        // deck.push_back({"4","Diamonds",4});
-        // deck.push_back({"5","Diamonds",5});
-        // deck.push_back({"6","Diamonds",6});
-        // deck.push_back({"7","Diamonds",7});
-        // deck.push_back({"8","Diamonds",8});
-        // deck.push_back({"9","Diamonds",9});
-        // deck.push_back({"10","Diamonds",10});
-        // deck.push_back({"J","Diamonds",10});
-        // deck.push_back({"Q","Diamonds",10});
-        // deck.push_back({"K","Diamonds",10});
+        deck.push_back({"A","Diamonds",11});
+        deck.push_back({"2","Diamonds",2});
+        deck.push_back({"3","Diamonds",3});
+        deck.push_back({"4","Diamonds",4});
+        deck.push_back({"5","Diamonds",5});
+        deck.push_back({"6","Diamonds",6});
+        deck.push_back({"7","Diamonds",7});
+        deck.push_back({"8","Diamonds",8});
+        deck.push_back({"9","Diamonds",9});
+        deck.push_back({"10","Diamonds",10});
+        deck.push_back({"J","Diamonds",10});
+        deck.push_back({"Q","Diamonds",10});
+        deck.push_back({"K","Diamonds",10});
 
-        // deck.push_back({"A","Clubs",11});
-        // deck.push_back({"2","Clubs",2});
-        // deck.push_back({"3","Clubs",3});
-        // deck.push_back({"4","Clubs",4});
-        // deck.push_back({"5","Clubs",5});
-        // deck.push_back({"6","Clubs",6});
-        // deck.push_back({"7","Clubs",7});
-        // deck.push_back({"8","Clubs",8});
-        // deck.push_back({"9","Clubs",9});
-        // deck.push_back({"10","Clubs",10});
-        // deck.push_back({"J","Clubs",10});
-        // deck.push_back({"Q","Clubs",10});
-        // deck.push_back({"K","Clubs",10});
-
-
-
-            deck.push_back({"4","Clubs",4});
+        deck.push_back({"A","Clubs",11});
+        deck.push_back({"2","Clubs",2});
+        deck.push_back({"3","Clubs",3});
         deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
-            deck.push_back({"4","Clubs",4});
+        deck.push_back({"5","Clubs",5});
+        deck.push_back({"6","Clubs",6});
+        deck.push_back({"7","Clubs",7});
+        deck.push_back({"8","Clubs",8});
+        deck.push_back({"9","Clubs",9});
+        deck.push_back({"10","Clubs",10});
+        deck.push_back({"J","Clubs",10});
+        deck.push_back({"Q","Clubs",10});
+        deck.push_back({"K","Clubs",10});
         }
         void show_card(){
             for (int i=0;i<deck.size();i++){
@@ -111,6 +90,12 @@ class Deck {
              deck.erase(deck.begin()+r);
             return c;
         }
+        //  card draw(){
+        //     int r = 0;
+        //     card c=deck[r];
+        //      deck.erase(deck.begin()+r);
+        //     return c;
+        // }
         
 };
 class Hand {
@@ -119,6 +104,7 @@ class Hand {
      int score=0;
      int ace_count=0;
      int betting_amount;
+     bool is_doubling_down=false;
      bool hand_is_bust=false;
     public:
         card get_card(){
@@ -126,6 +112,15 @@ class Hand {
         }
         int get_score(){
             return score;
+        }
+        void set_doubling(){
+            this->is_doubling_down=true;
+        }
+        bool get_doubling(){
+            return is_doubling_down;
+        }
+        int get_size_of_hand(){
+            return hand.size();
         }
         bool is_same_ace(){
             return (hand.size()==2 && hand[0].value==hand[1].value);
@@ -181,6 +176,8 @@ class Player {
     private:
         vector<Hand> hand;
         int total_bet;
+        int insurance=0;
+        bool surrender =false;
         double balance;
     public:
         Player(double balance){
@@ -189,14 +186,14 @@ class Player {
         Hand &get_hand(int i){
             return hand[i];
         }
-        int get_bet_amount(Player player){
+        void set_bet_amount(int i){
     int bet_amount;
-    cout<<"Your balance:"<<player.get_balance()<<endl;
+    cout<<"Your balance:"<<balance<<endl;
     do{
         cout<<"Input your bet Amount: ";
         cin>>bet_amount;
-        }while(bet_amount<0||bet_amount>player.get_balance());
-        return bet_amount;
+        }while(bet_amount<0||bet_amount>balance);
+        hand[i].set_betting_amount(bet_amount);
 }
     void reset_hand(){
         hand.clear();
@@ -234,7 +231,21 @@ class Player {
         new_hand.set_betting_amount(money);
         hand.insert(hand.begin()+i+1,new_hand);
        }
-
+       bool can_double(int i){
+        return hand[i].getBet()*2 <=balance;
+       }
+       void set_insurance(int insurance_betting){
+        this->insurance=insurance_betting;
+       }
+       int get_insurance(){
+        return insurance;
+       }
+       void set_surr(){
+        this->surrender=true;
+       }
+       bool is_surr(){
+        return surrender;
+       }
 };
 class Dealer{
     private :
@@ -268,38 +279,19 @@ bool ask_user_for_continue(int &selection,Player player){
         cout << "(Any number). Back to menu\n";
         cout << "Your choice: ";
         cin >> selection;
+        cout<<selection;
         if(selection == 1){
                return true;
         }
         return false;
 }
-// int get_bet_amount(Player player){
-//     int bet_amount;
-//     cout<<"Your balance:"<<player.get_balance()<<endl;
-//     do{
-//         cout<<"Input your bet Amount: ";
-//         cin>>bet_amount;
-//         }while(bet_amount<0||bet_amount>player.get_balance());
-//         return bet_amount;
-// }
 void deal_initial_cards(Player &player, Deck &d,Dealer &dealer){
-    // cout<<"-----------------------------"<<endl;
-    // cout<<"Your balance: "<<player.get_balance()<<endl;
     player.get_hand(0).add_card(d.draw());
     dealer.get_hand().add_card(d.draw());
     player.get_hand(0).add_card(d.draw());
     dealer.get_hand().add_card(d.draw());
-    //cout<<"Your cards"<<endl;
-    //player.show_card(num_of_hands);
-    //cout<<"Hand:"<<player.get_hands();
-    // for (int i=0;i<player.get_hands();i++){
-    // cout<<"\nScore:"<<player.get_score(i);
-    
-    // cout<<endl;
-    // }
 }
 bool check_blackjack(Dealer dealer,Player &player,int bet_amount){
-
     if (dealer.get_hand().is_black_jack() && player.get_hand(0).is_black_jack()){
             show_card(dealer,player);
             cout<<"\nTie\n";
@@ -310,6 +302,9 @@ bool check_blackjack(Dealer dealer,Player &player,int bet_amount){
         else if (dealer.get_hand().is_black_jack()){
             show_card(dealer,player);
             cout<<"\nDealer win\n";
+            if (player.get_insurance()>=1){
+                cout<<"You win the insurance\n";
+            }
                     return true;
                 }
         else if (player.get_hand(0).is_black_jack()){
@@ -327,10 +322,17 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         int split_count=0;
     while (i<player.get_hands_size()){
         int selection;
-        if (player.get_hand(i).is_same_ace()){
-                cout<<"Yes";
+        if (player.get_hand(i).get_size_of_hand()==1 &&( player.get_hand(i).get_card().name_card == "A")){
+            player.get_hand(i).add_card(d.draw());
+            i++;
         }
-        int maxOption = 2;
+    else {
+        int hitOpt = 1;
+        int standOpt = 2;
+        int splitOpt = -1;
+        int doubleOpt = -1;
+        int surrOpt= -1;
+        int option = 3;
         cout<<"-----------------------------"<<endl;
         cout<<"Your balance: "<<player.get_balance()<<endl;
         cout<<"Dealer card: ";
@@ -344,9 +346,16 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<"\tWaiting\n";
             }
             else if (i>j&& !player.get_hand(j).is_bust()){
+                if (player.get_hand(j).get_doubling()){
+                    cout<<"*";
+                }
+               
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<"\tWaiting for the dealer turn\n";
             }
             else {
+                if (player.get_hand(j).get_doubling()){
+                    cout<<"*";
+                }
                 cout<<"Hand "<<j+1<<"\tBet: "<<player.get_hand(j).getBet()<<": Bust\n";
             }
             
@@ -361,12 +370,20 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         cout<<"2.Stand\n";
         if (player.get_hand(i).same_two_value_card() &&(player.get_balance() > player.getTotalBet())&&split_count<4
     &&!(player.get_hand(i).getBet()*2 > player.get_balance()) ){
-            cout<<"3.Split\n";
-            maxOption=3;
-            split_count++;
+        splitOpt = option;
+    cout << option++ << ".Split\n";
+            
+        }
+        if (player.get_hand(i).get_size_of_hand()==2&&split_count==0){
+            surrOpt =option;
+            cout<<option++<<".Surrender\n";
+        }
+        if (player.can_double(i)&& player.get_hand(i).get_size_of_hand()==2){
+            doubleOpt = option;
+                 cout << option++ << ".Double\n";
         }
         if(player.get_hand(i).get_score()<16){
-            cout<<"You should draw more\n";
+            cout<<"You should hit more\n";
         }
         do{
         cout<<"\nHand "<<i+1<<" chosing...\n";
@@ -377,12 +394,11 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         continue;
     }
 
-        }while((selection < 1 || selection > maxOption));
+        }while((selection < 1 || selection > option));
         cout<<"-----------------------------"<<endl;
         //cout<<"Selection:"<<selection<<endl;
-        switch (selection)
-        {
-        case 1:
+        
+        if (selection== hitOpt){
             //cout<<"i="<<i<<endl;    
             player.get_hand(i).add_card(d.draw());
              if (player.get_hand(i).is_bust()) {
@@ -391,22 +407,43 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         
             system("cls");
             cout<<endl;
-            break;
-        case 2:
+        }
+        else if (selection == standOpt){
             i++;
             system("cls");
-            break;
-        case 3:
+        }
+        else if (selection == splitOpt) {
 
            player.get_card_from_hand(i,player.get_hand(i).getBet());
-
+            split_count++;
             system("cls");
             //cout<<player.getTotalBet();
-            break;
+        
+        }
+        else if (selection == doubleOpt) {
+            player.get_hand(i).set_doubling();
+            player.get_hand(i).add_card(d.draw());
+            i++;
+            system("cls");
+    }
+        else if (selection==surrOpt){
+            int option2;
+            do{
+                cout<<"Are you sure to surrender ?"<<endl;
+                cout<<"1.Yes\n";
+                cout<<"2.No\n";
+                cout<<"Your option:";
+                cin>>option2;
+            }while(option2<1|| option2>2);
+            if (option2 ==1){
+            player.set_surr();
+            return ;
+            }
+            
         }
 
+}
     }
-   
 }
 void dealer_turn(Dealer &dealer,Deck &d){
     while(!(dealer.get_hand().get_score() >= 17))
@@ -474,7 +511,6 @@ void Play_game(Player &player){
     while(true){
             if (player.get_balance() >0)
                 {
-                int bet_amount=player.get_bet_amount(player);
                 system("cls");
                 Deck d;
                 Dealer dealer;
@@ -482,30 +518,63 @@ void Play_game(Player &player){
                 player.reset_hand();
                 dealer.get_hand().clear_hand();
                 player.add_hand(player_hand);  ///lam toi day 
-                player.get_hand(0).set_betting_amount(bet_amount);
+                player.set_bet_amount(0);
                 deal_initial_cards(player,d,dealer);
                 int ask_continue;
-                if (check_blackjack(dealer,player,bet_amount)){
+                if (dealer.get_hand().get_card().name_card=="A"&& player.get_hand(0).getBet()>=2
+                        && (1+player.get_hand(0).getBet())<=player.get_balance()){
+                    int select;
+                    cout<<"Dealer Card: "<<dealer.get_hand().get_card().name_card<<" +  ? "<<endl;
+                    do {
+                        cout<<"Would you like to buy insurance?\n";
+                        cout<<"1.Yes\n";
+                        cout<<"2.No\n";
+                        cout<<"Your option:";
+                        cin>>select;
+                    }while(select<1||select>2);
+                    if (select==1){
+                        int insurance_betting;
+                        do{
+                            cout<<"How much would you like to pay for the insurane ?"<<endl;
+                            cout<<"Betting:";
+                            cin>>insurance_betting;
+                        }while(insurance_betting <1 ||insurance_betting*2>player.get_hand(0).getBet()||
+                    (insurance_betting+player.get_hand(0).getBet())>player.get_balance());
+                        player.set_insurance(insurance_betting);
+                    }
+                }
+                if (check_blackjack(dealer,player,player.get_hand(0).getBet())){
                     if (!ask_user_for_continue(ask_continue,player))
                             return;
                 }
                 else {
-                    player_turn(player,d,dealer,bet_amount);
-                    dealer_turn(dealer,d);
-                        compare_result(dealer,player,bet_amount);
-                        if(!ask_user_for_continue(ask_continue,player))
+                    if (player.get_insurance()>1)
+                    cout<<"You lose the insurance :(("<<endl;
+                     player_turn(player,d,dealer,player.get_hand(0).getBet());
+                     
+                     if (!player.is_surr()){
+                        dealer_turn(dealer,d);
+                        compare_result(dealer,player,player.get_hand(0).getBet());
+                     }
+                    else {
+                        cout<<"You surrender\n";
+                    }
+                        if(ask_user_for_continue(ask_continue,player)==false)
                             return;
+                        
                     }
                 
             }
         
-            else {
-                cout<<"-----------------------------"<<endl;
-                cout<<"Please deposit more money"<<endl;
-                cout<<"-----------------------------"<<endl;
-                break;
-            }
-        }
+        //     else {
+        //         cout<<"-----------------------------"<<endl;
+        //         cout<<"Please deposit more money"<<endl;
+        //         cout<<"-----------------------------"<<endl;
+        //         break;
+        //     }
+            //cout<<"khoa";
+         }
+        
 }
 void deposit(Player &player){
     double amount;
@@ -602,23 +671,4 @@ void deposit(Player &player){
 int main (){
     srand(time(0));
     Menu();
-
-    // Deck d1;
-    // //  cout<<"\tBefore suffle"<<endl;
-    // //  d1.show_card();
-    // cout<<"\tAfter suffle"<<endl;
-    // d1.show_card();
-    // Player p1(5000);
-    //  cout<<"\tPlayer Card"<<endl;
-    //   p1.add_card(d1.draw());
-    //   //p1.show_card();
-    //  // p1.draw_a_card();
-    //   p1.add_card(d1.draw());
-      
-
-    //   p1.show_card();
-    //    cout<<p1.is_bust();
-    //    cout<<"\n Black Jack \n";
-    //    cout<<p1.is_black_jack();
-
 }

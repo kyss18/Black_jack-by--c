@@ -1,10 +1,11 @@
 #include<iostream>
 #include<vector>
-//#include <algorithm>
+#include <algorithm>
 #include <random>
 #include<math.h>
-//#include <cstdlib>
+#include <chrono>
 #include <ctime>
+
 
 using namespace std;
 typedef struct card{
@@ -13,97 +14,69 @@ typedef struct card{
     int value;
 }card;
 
-
+vector<string> suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+vector<string> ranks = {"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
 class Deck {
     private:
-    vector<card> deck;
+    vector<card> cards;
     vector <card> discard_tray;
+    int initial_size;
+    bool need_shuffle = false;
+
 
     public:
         Deck(){
-        deck.push_back({"A","Hearts",11});
-        deck.push_back({"3","Hearts",3});
-        deck.push_back({"4","Hearts",4});
-        deck.push_back({"2","Hearts",2});
-        deck.push_back({"3","Hearts",3});
-        deck.push_back({"4","Hearts",4});
-        deck.push_back({"5","Hearts",5});
-        deck.push_back({"6","Hearts",6});
-        deck.push_back({"7","Hearts",7});
-        deck.push_back({"8","Hearts",8});
-        deck.push_back({"9","Hearts",9});
-        deck.push_back({"10","Hearts",10});
-        deck.push_back({"J","Hearts",10});
-        deck.push_back({"Q","Hearts",10});
-        deck.push_back({"K","Hearts",10});
-
-        deck.push_back({"A","Space",11});
-        deck.push_back({"2","Space",2});
-        deck.push_back({"3","Space",3});
-        deck.push_back({"4","Space",4});
-        deck.push_back({"5","Space",5});
-        deck.push_back({"6","Space",6});
-        deck.push_back({"7","Space",7});
-        deck.push_back({"8","Space",8});
-        deck.push_back({"9","Space",9});
-        deck.push_back({"10","Space",10});
-        deck.push_back({"J","Space",10});
-        deck.push_back({"Q","Space",10});
-        deck.push_back({"K","Space",10});
-
-        deck.push_back({"A","Diamonds",11});
-        deck.push_back({"2","Diamonds",2});
-        deck.push_back({"3","Diamonds",3});
-        deck.push_back({"4","Diamonds",4});
-        deck.push_back({"5","Diamonds",5});
-        deck.push_back({"6","Diamonds",6});
-        deck.push_back({"7","Diamonds",7});
-        deck.push_back({"8","Diamonds",8});
-        deck.push_back({"9","Diamonds",9});
-        deck.push_back({"10","Diamonds",10});
-        deck.push_back({"J","Diamonds",10});
-        deck.push_back({"Q","Diamonds",10});
-        deck.push_back({"K","Diamonds",10});
-
-        deck.push_back({"A","Clubs",11});
-        deck.push_back({"2","Clubs",2});
-        deck.push_back({"3","Clubs",3});
-        deck.push_back({"4","Clubs",4});
-        deck.push_back({"5","Clubs",5});
-        deck.push_back({"6","Clubs",6});
-        deck.push_back({"7","Clubs",7});
-        deck.push_back({"8","Clubs",8});
-        deck.push_back({"9","Clubs",9});
-        deck.push_back({"10","Clubs",10});
-        deck.push_back({"J","Clubs",10});
-        deck.push_back({"Q","Clubs",10});
-        deck.push_back({"K","Clubs",10});
-
         
+        for (int d = 0; d < 3; d++) { // 3 decks
+            for (auto& suit : suits) {
+                for (auto& rank : ranks) {
+
+                    int value;
+
+                    if (rank == "A") value = 11;
+                    else if (rank == "J" || rank == "Q" || rank == "K") value = 10;
+                    else value = stoi(rank);
+
+                    cards.push_back({rank, suit, value});
+                }
+            }
         }
+        initial_size=cards.size();
+        }
+        void shuffleDeck() {
+        random_shuffle(cards.begin(), cards.end());
+    }
         void show_card(){
-            for (int i=0;i<deck.size();i++){
-                cout<<deck[i].name_card<<" "<<deck[i].type_card<<" "<<endl;
+            for (int i=0;i<cards.size();i++){
+                cout<<cards[i].name_card<<" "<<cards[i].type_card<<" "<<endl;
             }
             
         }
-        
-        card draw(){
-            int r = rand() % deck.size();
-            card c=deck[r];
-             deck.erase(deck.begin()+r);
+         bool shouldShuffle() {
+            return need_shuffle;
+            }
+         card draw(){
+            card c=cards.back();
+            cards.pop_back();
+            if (cards.size() < initial_size*0.25) {
+            need_shuffle = true;
+        }
             return c;
         }
-        //  card draw(){
-        //     int r = 0;
-        //     card c=deck[r];
-        //      deck.erase(deck.begin()+r);
-        //     return c;
-        // }
         void take_card_back(card card){
             discard_tray.push_back(card);
         }
-        
+        void show_tray(){
+            for (auto x :discard_tray){
+                    cout<<x.name_card;
+            }
+        }
+        void merge(){
+            cards.insert(cards.end(), discard_tray.begin(), discard_tray.end());
+            discard_tray.clear();
+            initial_size = cards.size();
+            need_shuffle = false;
+        }
 };
 class Hand {
     private:
@@ -116,6 +89,9 @@ class Hand {
     public:
         card get_card(){
             return hand[0];
+        }
+        card get_card(int i){
+            return hand[i];
         }
         int get_score(){
             return score;
@@ -412,7 +388,8 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
          }
          cout<<"\n-----------------------------"<<endl;
          //cout<<player.getBetting(i)*2<<"-"<<player.get_balance();
-         cout<<player.get_balance()<<"-"<< player.getTotalBet();
+         //cout<<player.get_balance()<<"-"<< player.getTotalBet();
+         cout<<"\tOptions:"<<endl;
         cout<<"\n1.Hit\n";
         cout<<"2.Stand\n";
         if (player.get_hand(i).same_two_value_card() &&(player.get_balance() > player.getTotalBet())&&split_count<4
@@ -442,7 +419,7 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
         if (selection== hitOpt){
             //cout<<"i="<<i<<endl;    
             player.get_hand(i).add_card(d.draw());
-             if (player.get_hand(i).is_bust()) {
+             if (player.get_hand(i).is_bust()||player.get_hand(i).get_score()==21) {
             i++;
              }
         
@@ -467,6 +444,7 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
             i++;
             system("cls");
     }
+        
         else if (selection==surrOpt){
             int option2;
             do{
@@ -480,8 +458,12 @@ void player_turn(Player &player,Deck &d,Dealer dealer,int betting_amount){
             player.set_surr();
             return ;
             }
+            system("cls");
             
         }
+        else 
+            system("cls");
+        
 
 }
     }
@@ -600,18 +582,41 @@ void compare_result(Dealer dealer,Player &player,int bet_amount){
         cout<<"NET:"<<player.get_Net()<<endl;
         }
 }
+void put_cards_back(Deck &d,Player &player,Dealer &dealer){
+    //for player
+    for (int i=0;i<player.get_hands_size();i++){
+        cout << "Hand " << i + 1 << ":\n";
+        Hand &h_player=player.get_hand(i);
+        for (int j=0;j<h_player.get_size_of_hand();j++){
+          card c=h_player.get_card(j);  
+          d.take_card_back(c);
+        }
+         h_player.clear_hand();
+    }
+    //for dealer
+    Hand &h_dealer=dealer.get_hand();
+    for (int i=0;i<h_dealer.get_size_of_hand();i++){
+        card c=h_dealer.get_card(i);
+        d.take_card_back(c);
+    }
+     h_dealer.clear_hand();
+    if (d.shouldShuffle()){
+        d.merge();
+        d.shuffleDeck();
+    }
+}
 void Play_game(Player &player){
-     
+     Deck d;
+    d.shuffleDeck();
+    Dealer dealer;
     while(true){
             if (player.get_balance() >0)
                 {
                 system("cls");
-                Deck d;
-                Dealer dealer;
-                Hand player_hand;
+               Hand player_hand;
                 player.reset_hand();
                 dealer.get_hand().clear_hand();
-                player.add_hand(player_hand);  ///lam toi day 
+                player.add_hand(player_hand);  
                 player.set_bet_amount(0);
                 deal_initial_cards(player,d,dealer);
                 int ask_continue;
@@ -639,14 +644,12 @@ void Play_game(Player &player){
                     }
                 }
                 if (check_blackjack(dealer,player,player.get_hand(0).getBet())){
-                    
                     if (!ask_user_for_continue(ask_continue,player))
                             return;
                 }
                 else {
                     
                      player_turn(player,d,dealer,player.get_hand(0).getBet());
-                     
                      if (!player.is_surr()){
                         dealer_turn(dealer,d);
                         compare_result(dealer,player,player.get_hand(0).getBet());
@@ -655,10 +658,10 @@ void Play_game(Player &player){
                         cout<<"You surrender\n";
                         cout<<"You lose 50% money\n";
                         player.update_blance_surr();
+                        put_cards_back(d,player,dealer);
                     }
                         if(ask_user_for_continue(ask_continue,player)==false)
                             return;
-                        
                     }
                 
             }
@@ -670,8 +673,9 @@ void Play_game(Player &player){
                 break;
             }
             //cout<<"khoa";
-
+            put_cards_back(d,player,dealer);
          }
+         
         
 }
 void deposit(Player &player){
@@ -727,10 +731,12 @@ cout.precision(0);
     cout<<"Your option: ";
     cin>>choose_menu;
     switch(choose_menu){
-        case 1:
+        case 1:{
         system("cls");
         Play_game(player);
+        }
         break;
+        
         case 2:
             cout<<"To be continue\n";
             break;
@@ -762,13 +768,16 @@ cout.precision(0);
             
             return;
         default:
-            cout<<"Wrong Option";
+        system("cls");
             break;
         }
         //system("cls");
     }
  }
 int main (){
+     //auto start = chrono::high_resolution_clock::now();
     srand(time(0));
+
     Menu();
+    
 }

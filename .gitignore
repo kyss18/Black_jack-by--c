@@ -1,1 +1,21 @@
-folder_name/output*
+# Compiled output
+output/*.exe
+output/*.o
+output/*.out
+!output/.gitkeep
+
+# Build artifacts
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+
+# VS Code / IDE
+.vscode/
+*.user
+*.suo
+
+# Windows
+Thumbs.db
+Desktop.ini

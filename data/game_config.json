@@ -1,0 +1,15 @@
+{
+  "game_settings": {
+    "num_decks": 3,
+    "shuffle_threshold": 0.25,
+    "min_bet": 1,
+    "max_bet": 10000,
+    "blackjack_payout": 1.5,
+    "max_splits": 4,
+    "dealer_stand_on": 17,
+    "allow_insurance": true,
+    "allow_surrender": true,
+    "allow_double_down": true,
+    "allow_split": true
+  }
+}

@@ -1,11 +1,21 @@
+# Claude Code
+.claude/
+
 # Compiled output
 output/*.exe
 output/*.o
 output/*.out
+output/*.obj
 !output/.gitkeep
 
+# Test build output
+test/output/
+test/*.exe
+test/*.o
+test/*.out
+test/*.obj
+
 # Build artifacts
-*.obj
 *.pdb
 *.ilk
 *.exp

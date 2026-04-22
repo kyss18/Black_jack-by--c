@@ -1,7 +1,7 @@
 #include "../include/Deck.h"
 #include <algorithm>
 #include <random>
-
+using namespace std;
 Deck::Deck() {
     need_shuffle = false;
 
@@ -26,7 +26,7 @@ Deck::Deck() {
 void Deck::shuffle() {
     random_device rd;
     mt19937 g(rd());
-    shuffle(cards.begin(), cards.end(), g);
+    std::shuffle(cards.begin(), cards.end(), g);
 }
 
 void Deck::show_card() {

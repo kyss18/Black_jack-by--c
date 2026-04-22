@@ -8,6 +8,7 @@ using namespace std;
 class Hand {
 private:
     vector<card> hand;
+    vector <string> action;
     int score = 0;
     int ace_count = 0;
     int betting_amount = 0;
@@ -17,6 +18,7 @@ public:
     card get_card();
     card get_card(int i);
     int get_score();
+    const vector<string> get_action() const;
     void set_double_down();
     bool is_doubled_down();
     int get_size_of_hand();
@@ -30,4 +32,5 @@ public:
     card pop_card();
     void set_betting_amount(int amount);
     int get_bet();
+    void add_action(string s);
 };

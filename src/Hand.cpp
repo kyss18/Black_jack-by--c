@@ -75,11 +75,15 @@ card Hand::pop_card() {
     hand.pop_back();
     return c;
 }
-
+void Hand::add_action(string s){
+    action.push_back(s);
+}
 void Hand::set_betting_amount(int amount) {
     this->betting_amount = amount;
 }
-
+const vector<string> Hand::get_action() const {
+    return action;
+}
 int Hand::get_bet() {
     return betting_amount;
 }

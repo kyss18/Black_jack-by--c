@@ -38,4 +38,5 @@ public:
     int get_loss();
     int get_earn();
     int get_net();
+    
 };

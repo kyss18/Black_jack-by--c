@@ -185,14 +185,14 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
     cout << "Starting balance:" << player.get_balance() << endl;
     cout << "Dealer cards:";
     dealer.get_hand().show_all_card();
-    if (player.get_insurance() > 1) {
+    if (player.get_insurance() > 0) {
         cout << "\nLosing the insurance :((" << endl;
         player.take_balance(player.get_insurance());
         cout<<"Insurance take: "<<player.get_insurance();
     }
     cout << endl;
     for (int i = 0; i < player.get_hands_size(); i++) {
-        if (dealer.get_hand().get_score() == (player.get_hand(i).get_score()&&!player.get_hand(i).is_bust())) {
+        if (dealer.get_hand().get_score() == player.get_hand(i).get_score() && !player.get_hand(i).is_bust()) {
             cout << "Your Cards: ";
             player.get_hand(i).show_all_card();
             cout << "\nHand " << i + 1 << ": ";
@@ -293,10 +293,7 @@ void put_cards_back(Deck& d, Player& player, Dealer& dealer) {
         d.take_card_back(c);
     }
     h_dealer.clear_hand();
-    if (d.needs_shuffle()) {
-        d.merge();
-        d.shuffle();
-    }
+    
 }
 
 void play_game(Player& player) {

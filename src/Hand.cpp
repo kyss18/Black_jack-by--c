@@ -53,8 +53,8 @@ bool Hand::is_bust() {
 }
 
 bool Hand::is_black_jack() {
-    return (hand[0].value == 10 && hand[1].value == 11) ||
-           (hand[0].value == 11 && hand[1].value == 10);
+    return hand.size() == 2 && ((hand[0].value == 10 && hand[1].value == 11) ||
+           (hand[0].value == 11 && hand[1].value == 10));
 }
 
 void Hand::clear_hand() {
@@ -66,7 +66,7 @@ void Hand::clear_hand() {
 }
 
 bool Hand::has_pair() {
-    return (hand[0].value == hand[1].value) && hand.size() == 2;
+    return hand.size() == 2 && (hand[0].value == hand[1].value);
 }
 
 card Hand::pop_card() {

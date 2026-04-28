@@ -1,12 +1,18 @@
 # Claude Code
 .claude/
 
+# IntelliJ IDEA
+.idea/
+
 # Compiled output
 output/*.exe
 output/*.o
 output/*.out
 output/*.obj
 !output/.gitkeep
+
+# All .exe files anywhere in project
+*.exe
 
 # Test build output
 test/output/

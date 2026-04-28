@@ -1,51 +1,71 @@
 {
-  "gameId": 2,
-  "bet": 100,
-  "balance_before": 1000,
-  "balance_after": 1100,
-  "insurance": {
-    "taken": false,
-    "bet": 0,
-    "result": "none"
-  }
-  "dealer": {
-    "cards": [
-      { "rank": "K", "suit": "Hearts",  "value": 10 },
-      { "rank": "9", "suit": "Spades",  "value": 9  }
-    ],
-    "score": 19
-  },
-  "player": {
-    "insurance_bet": 0,
-    "insurance_result": "none",
-    "hands": [
-      {
-        "hand_index": 1,  
-        "bet": 100,
-        "cards": [
-          { "rank": "8", "suit": "Clubs",    "value": 8 },
-          { "rank": "Q", "suit": "Diamonds", "value": 10 }
+    "balance": {
+        "after_playing": 890.0,
+        "starting_balance": 900.0
+    },
+    "dealer": {
+        "hand": {
+            "action": [
+                "Hit",
+                "Hit",
+                "Bust"
+            ],
+            "betting_amount": 0,
+            "hand": [
+                {
+                    "name_card": "3",
+                    "type_card": "Spades"
+                },
+                {
+                    "name_card": "6",
+                    "type_card": "Clubs"
+                },
+                {
+                    "name_card": "3",
+                    "type_card": "Diamonds"
+                },
+                {
+                    "name_card": "10",
+                    "type_card": "Spades"
+                }
+            ],
+            "hand_is_bust": true,
+            "is_doubling_down": false,
+            "result": "",
+            "score": 22
+        }
+    },
+    "player": {
+        "balance": 890.0,
+        "hand": [
+            {
+                "action": [
+                    "Hit"
+                ],
+                "betting_amount": 10,
+                "hand": [
+                    {
+                        "name_card": "7",
+                        "type_card": "Clubs"
+                    },
+                    {
+                        "name_card": "5",
+                        "type_card": "Clubs"
+                    },
+                    {
+                        "name_card": "K",
+                        "type_card": "Spades"
+                    }
+                ],
+                "hand_is_bust": true,
+                "is_doubling_down": false,
+                "result": "lose",
+                "score": 22
+            }
         ],
-        "score": 18,
-        "result": "lose",
-        "actions": ["Split", "Stand"],
-        "bust": false,
-        "double_down": false
-      },
-      {
-        "hand_index": 2,
-        "bet": 100,
-        "cards": [
-          { "rank": "8", "suit": "Hearts", "value": 8 },
-          { "rank": "A", "suit": "Spades", "value": 11 },
-          { "rank": "3", "suit": "Clubs",  "value": 3  }
-        ],
-        "score": 22,
-        "result": "lose",
-        "actions": ["Split", "Hit", "Bust"],
-        "bust": true,
-        "double_down": false
-      }
-    ]
-  }
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 0,
+        "totalloss": 10
+    }
 }

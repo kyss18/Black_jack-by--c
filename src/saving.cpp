@@ -6,6 +6,8 @@ void save_game(Balance balance,Dealer dealer,Player player){
     balance.after_playing=player.get_balance();
     Game game={balance,dealer,player};
     json j=game;
-     cout << j.dump(4) << endl;
+    ofstream file("data/game_config.json");
+    file << j.dump(4) << endl;
+    file.close();
 }
 

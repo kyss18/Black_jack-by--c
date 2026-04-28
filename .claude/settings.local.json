@@ -3,7 +3,15 @@
     "allow": [
       "Bash(g++ --version)",
       "Bash(cl)",
-      "Bash(g++ -std=c++17 -I include main.cpp src/*.cpp)"
+      "Bash(g++ -std=c++17 -I include main.cpp src/*.cpp)",
+      "Read(//c/msys64/mingw64/bin/**)",
+      "Bash(/c/msys64/mingw64/bin/g++ --version)",
+      "Read(//c/mingw/bin/**)",
+      "Bash(/c/mingw/bin/g++ --version)",
+      "Bash(cp /c/msys64/ucrt64/bin/libgcc_s_seh-1.dll .)",
+      "Bash(cp /c/msys64/ucrt64/bin/libstdc++-6.dll .)",
+      "Bash(g++ -std=c++14 -Iinclude main.cpp src/Deck.cpp src/Hand.cpp src/Player.cpp src/Dealer.cpp src/input.cpp src/service.cpp src/saving.cpp src/APIclient.cpp -L\"/c/Users/utkim/OneDrive/Desktop/C++/API\" -lcurl -o main.exe)",
+      "Bash(echo \"Exit code: $?\")"
     ]
   }
 }

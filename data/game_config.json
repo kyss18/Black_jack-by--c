@@ -1,71 +1,678 @@
-{
-    "balance": {
-        "after_playing": 890.0,
-        "starting_balance": 900.0
-    },
-    "dealer": {
+[
+  {
+    "createdAt": "2026-04-28 00:23:01",
+    "gameSession": "4806d91a",
+    "id": 6,
+    "jsonData": {
+      "balance": {
+        "after_playing": 890,
+        "starting_balance": 900
+      },
+      "dealer": {
         "hand": {
+          "action": [
+            "Hit",
+            "Hit",
+            "Bust"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "3",
+              "type_card": "Spades"
+            },
+            {
+              "name_card": "6",
+              "type_card": "Clubs"
+            },
+            {
+              "name_card": "3",
+              "type_card": "Diamonds"
+            },
+            {
+              "name_card": "10",
+              "type_card": "Spades"
+            }
+          ],
+          "hand_is_bust": true,
+          "is_doubling_down": false,
+          "result": "",
+          "score": 22
+        }
+      },
+      "player": {
+        "balance": 890,
+        "hand": [
+          {
             "action": [
-                "Hit",
-                "Hit",
-                "Bust"
+              "Hit"
             ],
-            "betting_amount": 0,
+            "betting_amount": 10,
             "hand": [
-                {
-                    "name_card": "3",
-                    "type_card": "Spades"
-                },
-                {
-                    "name_card": "6",
-                    "type_card": "Clubs"
-                },
-                {
-                    "name_card": "3",
-                    "type_card": "Diamonds"
-                },
-                {
-                    "name_card": "10",
-                    "type_card": "Spades"
-                }
+              {
+                "name_card": "7",
+                "type_card": "Clubs"
+              },
+              {
+                "name_card": "5",
+                "type_card": "Clubs"
+              },
+              {
+                "name_card": "K",
+                "type_card": "Spades"
+              }
             ],
             "hand_is_bust": true,
             "is_doubling_down": false,
-            "result": "",
+            "result": "lose",
             "score": 22
-        }
-    },
-    "player": {
-        "balance": 890.0,
-        "hand": [
-            {
-                "action": [
-                    "Hit"
-                ],
-                "betting_amount": 10,
-                "hand": [
-                    {
-                        "name_card": "7",
-                        "type_card": "Clubs"
-                    },
-                    {
-                        "name_card": "5",
-                        "type_card": "Clubs"
-                    },
-                    {
-                        "name_card": "K",
-                        "type_card": "Spades"
-                    }
-                ],
-                "hand_is_bust": true,
-                "is_doubling_down": false,
-                "result": "lose",
-                "score": 22
-            }
+          }
         ],
         "insurance": 0,
         "surrender": false,
         "totalearn": 0,
         "totalloss": 10
+      }
     }
-}
+  },
+  {
+    "createdAt": "2026-04-28 00:23:21",
+    "gameSession": "2bbd2fe9",
+    "id": 7,
+    "jsonData": {
+      "balance": {
+        "after_playing": 910,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "10",
+              "type_card": "Hearts"
+            },
+            {
+              "name_card": "7",
+              "type_card": "Diamonds"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "lose",
+          "score": 17
+        }
+      },
+      "player": {
+        "balance": 910,
+        "hand": [
+          {
+            "action": [
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "K",
+                "type_card": "Spades"
+              },
+              {
+                "name_card": "9",
+                "type_card": "Hearts"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "win",
+            "score": 19
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 10,
+        "totalloss": 0
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:30",
+    "gameSession": "892e1ef3",
+    "id": 8,
+    "jsonData": {
+      "balance": {
+        "after_playing": 915,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "8",
+              "type_card": "Clubs"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Spades"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "lose",
+          "score": 17
+        }
+      },
+      "player": {
+        "balance": 915,
+        "hand": [
+          {
+            "action": [
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "A",
+                "type_card": "Spades"
+              },
+              {
+                "name_card": "K",
+                "type_card": "Hearts"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "blackjack",
+            "score": 21
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 15,
+        "totalloss": 0
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:35",
+    "gameSession": "bef8ce77",
+    "id": 9,
+    "jsonData": {
+      "balance": {
+        "after_playing": 900,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "9",
+              "type_card": "Hearts"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Clubs"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "push",
+          "score": 18
+        }
+      },
+      "player": {
+        "balance": 900,
+        "hand": [
+          {
+            "action": [
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "9",
+                "type_card": "Spades"
+              },
+              {
+                "name_card": "9",
+                "type_card": "Diamonds"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "push",
+            "score": 18
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 0,
+        "totalloss": 0
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:41",
+    "gameSession": "a13c6dd1",
+    "id": 10,
+    "jsonData": {
+      "balance": {
+        "after_playing": 895,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "A",
+              "type_card": "Spades"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Hearts"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "win",
+          "score": 20
+        }
+      },
+      "player": {
+        "balance": 895,
+        "hand": [
+          {
+            "action": [
+              "Surrender"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "6",
+                "type_card": "Clubs"
+              },
+              {
+                "name_card": "10",
+                "type_card": "Diamonds"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "surrender",
+            "score": 16
+          }
+        ],
+        "insurance": 0,
+        "surrender": true,
+        "totalearn": 0,
+        "totalloss": 5
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:46",
+    "gameSession": "c0f7a449",
+    "id": 11,
+    "jsonData": {
+      "balance": {
+        "after_playing": 895,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "A",
+              "type_card": "Spades"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Hearts"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "win",
+          "score": 20
+        }
+      },
+      "player": {
+        "balance": 895,
+        "hand": [
+          {
+            "action": [
+              "Surrender"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "6",
+                "type_card": "Clubs"
+              },
+              {
+                "name_card": "10",
+                "type_card": "Diamonds"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "surrender",
+            "score": 16
+          }
+        ],
+        "insurance": 0,
+        "surrender": true,
+        "totalearn": 0,
+        "totalloss": 5
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:52",
+    "gameSession": "b207c8da",
+    "id": 12,
+    "jsonData": {
+      "balance": {
+        "after_playing": 910,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "A",
+              "type_card": "Hearts"
+            },
+            {
+              "name_card": "K",
+              "type_card": "Spades"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "blackjack",
+          "score": 21
+        }
+      },
+      "player": {
+        "balance": 910,
+        "hand": [
+          {
+            "action": [
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "8",
+                "type_card": "Clubs"
+              },
+              {
+                "name_card": "9",
+                "type_card": "Hearts"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "lose",
+            "score": 17
+          }
+        ],
+        "insurance": 5,
+        "surrender": false,
+        "totalearn": 10,
+        "totalloss": 0
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:23:58",
+    "gameSession": "35fe8613",
+    "id": 13,
+    "jsonData": {
+      "balance": {
+        "after_playing": 910,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Hit",
+            "Hit",
+            "Bust"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "6",
+              "type_card": "Spades"
+            },
+            {
+              "name_card": "7",
+              "type_card": "Hearts"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Clubs"
+            }
+          ],
+          "hand_is_bust": true,
+          "is_doubling_down": false,
+          "result": "bust",
+          "score": 22
+        }
+      },
+      "player": {
+        "balance": 910,
+        "hand": [
+          {
+            "action": [
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "K",
+                "type_card": "Hearts"
+              },
+              {
+                "name_card": "8",
+                "type_card": "Spades"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "win",
+            "score": 18
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 10,
+        "totalloss": 0
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:24:04",
+    "gameSession": "08c969ad",
+    "id": 14,
+    "jsonData": {
+      "balance": {
+        "after_playing": 880,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Hit",
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "9",
+              "type_card": "Diamonds"
+            },
+            {
+              "name_card": "8",
+              "type_card": "Clubs"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "win",
+          "score": 17
+        }
+      },
+      "player": {
+        "balance": 880,
+        "hand": [
+          {
+            "action": [
+              "Split",
+              "Stand"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "8",
+                "type_card": "Hearts"
+              },
+              {
+                "name_card": "5",
+                "type_card": "Clubs"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": false,
+            "result": "lose",
+            "score": 13
+          },
+          {
+            "action": [
+              "Hit",
+              "Bust"
+            ],
+            "betting_amount": 10,
+            "hand": [
+              {
+                "name_card": "8",
+                "type_card": "Spades"
+              },
+              {
+                "name_card": "7",
+                "type_card": "Diamonds"
+              },
+              {
+                "name_card": "K",
+                "type_card": "Hearts"
+              }
+            ],
+            "hand_is_bust": true,
+            "is_doubling_down": false,
+            "result": "lose",
+            "score": 25
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 0,
+        "totalloss": 20
+      }
+    }
+  },
+  {
+    "createdAt": "2026-04-28 00:24:09",
+    "gameSession": "22c3c135",
+    "id": 15,
+    "jsonData": {
+      "balance": {
+        "after_playing": 880,
+        "starting_balance": 900
+      },
+      "dealer": {
+        "hand": {
+          "action": [
+            "Hit",
+            "Stand"
+          ],
+          "betting_amount": 0,
+          "hand": [
+            {
+              "name_card": "7",
+              "type_card": "Spades"
+            },
+            {
+              "name_card": "9",
+              "type_card": "Hearts"
+            },
+            {
+              "name_card": "5",
+              "type_card": "Clubs"
+            }
+          ],
+          "hand_is_bust": false,
+          "is_doubling_down": false,
+          "result": "win",
+          "score": 21
+        }
+      },
+      "player": {
+        "balance": 880,
+        "hand": [
+          {
+            "action": [
+              "Double"
+            ],
+            "betting_amount": 20,
+            "hand": [
+              {
+                "name_card": "6",
+                "type_card": "Hearts"
+              },
+              {
+                "name_card": "5",
+                "type_card": "Spades"
+              },
+              {
+                "name_card": "4",
+                "type_card": "Diamonds"
+              }
+            ],
+            "hand_is_bust": false,
+            "is_doubling_down": true,
+            "result": "lose",
+            "score": 15
+          }
+        ],
+        "insurance": 0,
+        "surrender": false,
+        "totalearn": 0,
+        "totalloss": 20
+      }
+    }
+  }
+]

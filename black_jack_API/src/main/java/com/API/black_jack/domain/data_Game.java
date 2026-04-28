@@ -5,7 +5,8 @@ import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,9 +25,11 @@ public class data_Game {
     
     @Column(unique = true)
    private String gameSession = UUID.randomUUID().toString().substring(0, 8);
-    @Column(columnDefinition = "LONGTEXT") 
+    @JsonRawValue
+    @Column(columnDefinition = "LONGTEXT")
     private String jsonData;
-     @CreationTimestamp                    // Tự động lưu thời gian tạo
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     public Long getId() {
@@ -35,12 +38,18 @@ public class data_Game {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getGameSession() {
+        return gameSession;
+    }
     public String getJsonData() {
         return jsonData;
     }
     public void setJsonData(String jsonData) {
         this.jsonData = jsonData;
     }
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-    
+
 }

@@ -1,7 +1,10 @@
 #include "../include/input.h"
 #include "../include/service.h"
-#include <iostream>
+#include "../include/APIclient.h"
+#include "../include/json.hpp"
 
+#include <iostream>
+using json = nlohmann::json;
 using namespace std;
 
 bool ask_user_for_continue(int& selection, Player player) {
@@ -72,6 +75,7 @@ void show_menu() {
         cout << "\n===== BLACKJACK =====\n";
         cout << "Balance: $" << player.get_balance() << endl;
         cout << "1. Play blackjack\n";
+        cout << "2. History\n";
         cout << "5. Deposit\n";
         cout << "6. Check Balance\n";
         cout << "9. Exit\n";
@@ -89,7 +93,12 @@ void show_menu() {
                 
             } break;
             case 2:
-                cout << "To be continue\n";
+            {
+                 // GET
+            string history = get("http://localhost:8080/history");
+            json j = json::parse(history);
+            cout << j.dump(4) << endl;  
+            }
                 break;
             case 3:
                 cout << "To be continue\n";

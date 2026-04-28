@@ -15,7 +15,12 @@ int Hand::get_score() {
 void Hand::set_double_down() {
     this->is_doubling_down = true;
 }
-
+void Hand::set_result(string status){
+    this->result=status;
+}
+string Hand::get_result(){
+    return this->result;
+}
 bool Hand::is_doubled_down() {
     return is_doubling_down;
 }
@@ -59,6 +64,7 @@ bool Hand::is_black_jack() {
 
 void Hand::clear_hand() {
     hand.clear();
+    action.clear();
     is_doubling_down = false;
     hand_is_bust = false;
     score = 0;
@@ -71,7 +77,12 @@ bool Hand::has_pair() {
 
 card Hand::pop_card() {
     card c = hand.back();
-    score = score - c.value;
+      if (c.name_card == "A"){
+        score -= 1; 
+        ace_count--;
+      }
+    else
+        score -= c.value;
     hand.pop_back();
     return c;
 }

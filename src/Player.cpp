@@ -14,6 +14,11 @@ void Player::set_bet_amount(int i) {
     do {
         cout << "Input your bet Amount: ";
         cin >> bet_amount;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            bet_amount = -1;
+        }
     } while (bet_amount < 0 || bet_amount > balance);
     hand[i].set_betting_amount(bet_amount);
 }

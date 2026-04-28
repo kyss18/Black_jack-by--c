@@ -8,12 +8,12 @@ using namespace std;
 class Player {
 private:
     vector<Hand> hand;
-    int total_bet;
     int insurance = 0;
     bool surrender = false;
     double balance;
     int totalloss = 0;
     int totalearn = 0;
+     NLOHMANN_DEFINE_TYPE_INTRUSIVE(Player, hand, insurance, surrender, balance, totalloss, totalearn)
 public:
     Player(double balance);
     Hand& get_hand(int i);

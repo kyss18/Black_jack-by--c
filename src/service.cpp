@@ -1,5 +1,6 @@
-#include "../include/game.h"
+#include "../include/service.h"
 #include "../include/input.h"
+#include"../include/saving.h"
 #include <iostream>
 
 using namespace std;
@@ -26,6 +27,7 @@ void deal_initial_cards(Player& player, Deck& d, Dealer& dealer) {
 bool check_blackjack(Dealer dealer, Player& player, int bet_amount) {
     if (dealer.get_hand().is_black_jack() && player.get_hand(0).is_black_jack()) {
         show_card(dealer, player);
+        player.get_hand(0).set_result("tie");
         cout << "\nTie\n";
         if (player.get_insurance() >= 1) {
         cout << "\nLosing the insurance :((" << endl;
@@ -38,6 +40,7 @@ bool check_blackjack(Dealer dealer, Player& player, int bet_amount) {
         cout << "\nDealer win\n";
         player.take_balance(player.get_hand(0).get_bet());
         cout << "You lose hand: " << bet_amount<<endl;
+        player.get_hand(0).set_result("lose");
         if (player.get_insurance() >= 1) {
             cout << "\nYou win the insurance\n";
             cout << "You got:" << player.get_insurance() << " from the insurance." << endl;
@@ -47,6 +50,7 @@ bool check_blackjack(Dealer dealer, Player& player, int bet_amount) {
     } else if (player.get_hand(0).is_black_jack()) {
         show_card(dealer, player);
         cout << "\nYou Win\n";
+        player.get_hand(0).set_result("win");
         player.set_balance(bet_amount * 1.5);
         cout << "You got: " << bet_amount * 1.5 << endl;
         if (player.get_insurance() >= 1) {
@@ -125,6 +129,11 @@ void player_turn(Player& player, Deck& d, Dealer dealer, int betting_amount) {
                 cout << "\nHand " << i + 1 << " chosing...\n";
                 cout << "Your selection: ";
                 cin >> selection;
+                if (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(1000, '\n');
+                    selection = -1;
+                }
             } while (selection < 1 || selection > option);
             cout << "-----------------------------" << endl;
 
@@ -159,6 +168,11 @@ void player_turn(Player& player, Deck& d, Dealer dealer, int betting_amount) {
                     cout << "2.No\n";
                     cout << "Your option:";
                     cin >> option2;
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        option2 = -1;
+                    }
                 } while (option2 < 1 || option2 > 2);
                 if (option2 == 1) {
                     system("cls");
@@ -177,11 +191,19 @@ void player_turn(Player& player, Deck& d, Dealer dealer, int betting_amount) {
 void dealer_turn(Dealer& dealer, Deck& d) {
     while (!(dealer.get_hand().get_score() >= 17)) {
         dealer.get_hand().add_card(d.draw());
+        dealer.get_hand().add_action("Hit");
     }
+    if(dealer.get_hand().get_score() <= 21)
+    dealer.get_hand().add_action("Stand");
+    else
+    dealer.get_hand().add_action("Bust");
+dealer.get_hand().is_bust();
+
 }
 
 void compare_result(Dealer dealer, Player& player, int bet_amount) {
     cout << "Summaries: \n";
+
     cout << "Starting balance:" << player.get_balance() << endl;
     cout << "Dealer cards:";
     dealer.get_hand().show_all_card();
@@ -196,6 +218,7 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
             cout << "Your Cards: ";
             player.get_hand(i).show_all_card();
             cout << "\nHand " << i + 1 << ": ";
+            player.get_hand(i).set_result("tie");
             cout << "\n\tTie\n";
             cout << "You earn: nothing :))" << endl;
             cout << "-----------------------------" << endl;
@@ -213,6 +236,7 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
                 cout << "You lose: " << player.get_hand(i).get_bet();
                 player.set_loss(player.get_hand(i).get_bet());
             }
+            player.get_hand(i).set_result("lose");
             cout << "\n-----------------------------" << endl;
         } else if ((dealer.get_hand().get_score() < player.get_hand(i).get_score()) &&
                    !player.get_hand(i).is_bust()) {
@@ -227,9 +251,10 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
                 player.set_earn(player.get_hand(i).get_bet() * 2);
             } else {
                 player.set_balance(player.get_hand(i).get_bet());
-                cout << "You earn: " << bet_amount << endl;
+                cout << "You earn: " << player.get_hand(i).get_bet() << endl;
                 player.set_earn(player.get_hand(i).get_bet());
             }
+            player.get_hand(i).set_result("win");
             cout << "\n-----------------------------" << endl;
         } else if (player.get_hand(i).is_bust() ||
                    (player.get_hand(i).is_bust() && dealer.get_hand().is_bust())) {
@@ -246,7 +271,7 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
                 cout << "You lose: " << player.get_hand(i).get_bet();
                 player.set_loss(player.get_hand(i).get_bet());
             }
-            
+            player.get_hand(i).set_result("lose");
         } else {
             cout << "Your Cards: ";
             player.get_hand(i).show_all_card();
@@ -262,7 +287,7 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
                 cout << "You earn: " << bet_amount << endl;
                 player.set_earn(player.get_hand(i).get_bet());
             }
-            
+            player.get_hand(i).set_result("win");
         }
          cout<<"\nYour action: [ ";
         for (string s:player.get_hand(i).get_action()){
@@ -275,6 +300,7 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
         cout << "\nTotal loss:" << player.get_loss() << endl;
         cout << "NET:" << player.get_net() << endl;
     }
+    
 }
 
 void put_cards_back(Deck& d, Player& player, Dealer& dealer) {
@@ -297,6 +323,8 @@ void put_cards_back(Deck& d, Player& player, Dealer& dealer) {
 }
 
 void play_game(Player& player) {
+    Balance balance;
+    balance.starting_balance=player.get_balance();
     Deck d;
     d.shuffle();
     Dealer dealer;
@@ -322,6 +350,11 @@ void play_game(Player& player) {
                     cout << "2.No\n";
                     cout << "Your option:";
                     cin >> select;
+                    if (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        select = -1;
+                    }
                 } while (select < 1 || select > 2);
                 if (select == 1) {
                     int insurance_betting;
@@ -329,6 +362,11 @@ void play_game(Player& player) {
                         cout << "How much would you like to pay for the insurane ?  (1"<<" < bet < "<< player.get_hand(0).get_bet()/2 << endl;
                         cout << "Betting:";
                         cin >> insurance_betting;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(1000, '\n');
+                            insurance_betting = -1;
+                        }
                     } while (insurance_betting < 1 ||
                              insurance_betting * 2 > player.get_hand(0).get_bet() ||
                              (insurance_betting + player.get_hand(0).get_bet()) >
@@ -338,8 +376,12 @@ void play_game(Player& player) {
                 }
             }
             if (check_blackjack(dealer, player, player.get_hand(0).get_bet())) {
-                if (!ask_user_for_continue(ask_continue, player))
+                save_game(balance,dealer,player);
+                if (!ask_user_for_continue(ask_continue, player)){
+                    
                     return;
+                }
+                    
             } else {
                 player_turn(player, d, dealer, player.get_hand(0).get_bet());
                 if (!player.has_surrendered()) {
@@ -349,15 +391,19 @@ void play_game(Player& player) {
                     cout << "You surrender\n";
                     cout << "You lose 50% money\n";
                     player.deduct_surrender_penalty();
-                    put_cards_back(d, player, dealer);
+                    //put_cards_back(d, player, dealer);
                 }
-                if (ask_user_for_continue(ask_continue, player) == false)
+                save_game(balance,dealer,player);
+                if (ask_user_for_continue(ask_continue, player) == false){
+                    
                     return;
+                }
             }
         } else {
             cout << "-----------------------------" << endl;
             cout << "Please deposit more money" << endl;
             cout << "-----------------------------" << endl;
+            save_game(balance,dealer,player);
             break;
         }
         put_cards_back(d, player, dealer);

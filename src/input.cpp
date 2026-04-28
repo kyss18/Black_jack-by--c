@@ -1,5 +1,5 @@
 #include "../include/input.h"
-#include "../include/game.h"
+#include "../include/service.h"
 #include <iostream>
 
 using namespace std;
@@ -11,7 +11,6 @@ bool ask_user_for_continue(int& selection, Player player) {
     cout << "(Any number). Back to menu\n";
     cout << "Your choice: ";
     cin >> selection;
-    cout << selection;
     if (selection == 1)
         return true;
     return false;
@@ -23,6 +22,11 @@ void deposit(Player& player) {
     do {
         cout << "How much would you like to deposit : ";
         cin >> amount;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            amount = 0;
+        }
     } while (amount < -1 || amount == 0);
     if (amount > 0) {
         int choose;
@@ -32,6 +36,11 @@ void deposit(Player& player) {
             cout << "2.No\n";
             cout << "Your option:";
             cin >> choose;
+             if (cin.fail()) {
+            cin.clear();            // reset trạng thái lỗi
+            cin.ignore(1000, '\n'); // bỏ input rác trong buffer
+            choose = 0;             // reset về giá trị invalid để loop tiếp
+    }
         } while (choose < 1 || choose > 2);
         if (choose == 1) {
             player.add_balance(amount);
@@ -52,6 +61,11 @@ void show_menu() {
     do {
         cout << "Input your balance: ";
         cin >> balance;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            balance = 0;
+        }
     } while (balance <= 0);
     Player player(balance);
     while (true) {
@@ -63,10 +77,16 @@ void show_menu() {
         cout << "9. Exit\n";
         cout << "Your option: ";
         cin >> choose_menu;
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(1000, '\n');
+            choose_menu = -1;
+        }
         switch (choose_menu) {
             case 1: {
                 system("cls");
                 play_game(player);
+                
             } break;
             case 2:
                 cout << "To be continue\n";

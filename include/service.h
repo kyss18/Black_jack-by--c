@@ -2,7 +2,11 @@
 #include "Player.h"
 #include "Dealer.h"
 #include "Deck.h"
-
+typedef struct Balance{
+    double starting_balance;
+    double after_playing;
+}Balance;
+NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Balance,starting_balance , after_playing);
 void show_card(Dealer dealer, Player player);
 void deal_initial_cards(Player& player, Deck& d, Dealer& dealer);
 bool check_blackjack(Dealer dealer, Player& player, int bet_amount);

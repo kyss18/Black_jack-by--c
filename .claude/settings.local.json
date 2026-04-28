@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(g++ --version)",
-      "Bash(cl)"
+      "Bash(cl)",
+      "Bash(g++ -std=c++17 -I include main.cpp src/*.cpp)"
     ]
   }
 }

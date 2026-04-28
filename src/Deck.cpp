@@ -20,14 +20,13 @@ Deck::Deck() {
         }
     }
     //SPLIT (A + A)
-    // cards.push_back({"8", "Hearts", 8});    // dealer lá 2
-    // cards.push_back({"A", "Spades", 11});   // player lá 2
-    // cards.push_back({"5", "Diamonds", 5});  // dealer lá 1
-    // cards.push_back({"A", "Clubs", 11});    // player lá 1
-    // cards.push_back({"8", "Hearts", 8});    // dealer lá 2
-    // cards.push_back({"A", "Spades", 11});   // player lá 2
-    // cards.push_back({"5", "Diamonds", 5});  // dealer lá 1
-    // cards.push_back({"A", "Clubs", 11});    // player lá 1
+//     cards.push_back({"4",  "Clubs",    4});   // dealer hit (5+8=13 < 17, hit thêm)
+// cards.push_back({"K",  "Spades",  10});   // hand 2 lá 2 (sau split)
+// cards.push_back({"K",  "Clubs",   10});   // hand 1 lá 2 (sau split)
+// cards.push_back({"8",  "Hearts",   8});   // dealer lá 2
+// cards.push_back({"A",  "Spades",  11});   // player lá 2
+// cards.push_back({"5",  "Diamonds", 5});   // dealer lá 1
+// cards.push_back({"A",  "Clubs",   11});   // player lá 1   // player lá 1
     //Double
     // cards.push_back({"9", "Hearts", 9});    // dealer lá 2
     // cards.push_back({"6", "Spades", 6});    // player lá 2

@@ -22,9 +22,10 @@ string post(const string& url, const string& jsonBody) {
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
 
-        curl_easy_perform(curl);
+        CURLcode res = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
         curl_slist_free_all(headers);
+        if (res != CURLE_OK) return "";
     }
 
     return response;

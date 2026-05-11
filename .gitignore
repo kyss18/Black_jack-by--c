@@ -1,6 +1,6 @@
 # Claude Code
 .claude/
-
+.vscode/
 # IntelliJ IDEA
 .idea/
 
@@ -13,6 +13,8 @@ output/*.obj
 
 # All .exe files anywhere in project
 *.exe
+*.o
+*.out
 
 # Test build output
 test/output/

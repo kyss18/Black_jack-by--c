@@ -9,19 +9,42 @@ Hand& Player::get_hand(int i) {
 }
 
 void Player::set_bet_amount(int i) {
+     string thick = "========================================";
+    string thin  = "----------------------------------------";
     int bet_amount;
-    cout << "Your balance:" << balance << endl;
+
+    cout << "\n  " << thick << "\n";
+    cout << "  |            P L A C E   B E T          |\n";
+    cout << "  " << thick << "\n";
+    printf("  |  Balance : $%-26.1f|\n", balance);
+    cout << "  " << thin << "\n";
+    cout << "  |  Enter 0 to cancel                    |\n";
+    cout << "  " << thick << "\n";
+
     do {
-        cout << "Input your bet Amount: ";
+        cout << "  Your bet: $";
         cin >> bet_amount;
+
         if (cin.fail()) {
             cin.clear();
             cin.ignore(1000, '\n');
+            cout << "  [!] Invalid input. Please enter a number.\n";
             bet_amount = -1;
+        } else if (bet_amount < 0) {
+            cout << "  [!] Bet cannot be negative.\n";
+        } else if (bet_amount > balance) {
+            printf("  [!] Insufficient balance. Max bet: $%.1f\n", balance);
         }
+
     } while (bet_amount < 0 || bet_amount > balance);
+
+    cout << "  " << thin << "\n";
+    printf("  |  Bet placed: $%-24d|\n", bet_amount);
+    cout << "  " << thick << "\n";
+
     hand[i].set_betting_amount(bet_amount);
 }
+
 
 void Player::reset_hand() {
     hand.clear();

@@ -19,8 +19,8 @@ import jakarta.persistence.Table;
 @Table(name="data_blackjack")
 public class data_Game {
     
-    @Id                        // Đây là primary key
-    @GeneratedValue(strategy = GenerationType.IDENTITY)            // Tự động tăng (1, 2, 3...)
+    @Id                        
+    @GeneratedValue(strategy = GenerationType.IDENTITY)         
     private Long id;
     
     @Column(unique = true)

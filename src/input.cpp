@@ -2,7 +2,8 @@
 #include "../include/service.h"
 #include "../include/APIclient.h"
 #include "../include/json.hpp"
-
+#include "../include/Gamerecord.h"
+#include "../include/history.h"
 #include <iostream>
 using json = nlohmann::json;
 using namespace std;
@@ -72,14 +73,22 @@ void show_menu() {
     } while (balance <= 0);
     Player player(balance);
     while (true) {
-        cout << "\n===== BLACKJACK =====\n";
-        cout << "Balance: $" << player.get_balance() << endl;
-        cout << "1. Play blackjack\n";
-        cout << "2. History\n";
-        cout << "5. Deposit\n";
-        cout << "6. Check Balance\n";
-        cout << "9. Exit\n";
-        cout << "Your option: ";
+        string thick = "========================================";
+    string thin  = "----------------------------------------";
+
+    cout << "\n  " << thick << "\n";
+    cout << "  |        B L A C K J A C K              |\n";
+    cout << "  " << thick << "\n";
+    printf("  |  Balance: $%-27.1f|\n", player.get_balance());
+    cout << "  " << thin << "\n";
+    cout << "  |  [1]  Play                            |\n";
+    cout << "  |  [2]  History                         |\n";
+    cout << "  |  [5]  Deposit                         |\n";
+    cout << "  |  [6]  Check Balance                   |\n";
+    cout << "  " << thin << "\n";
+    cout << "  |  [9]  Exit                            |\n";
+    cout << "  " << thick << "\n";
+    cout << "  Your option: ";
         cin >> choose_menu;
         if (cin.fail()) {
             cin.clear();
@@ -96,8 +105,9 @@ void show_menu() {
             {
                  // GET
             string history = get("http://localhost:8080/history");
-            json j = json::parse(history);
-            cout << j.dump(4) << endl;  
+            nlohmann::json j = nlohmann::json::parse(history);
+            vector<GameRecord> records = j.get<vector<GameRecord>>();
+            show_history(records);
             }
                 break;
             case 3:

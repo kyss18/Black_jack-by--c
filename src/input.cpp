@@ -105,10 +105,15 @@ void show_menu() {
             {
                  // GET
             string history = get("http://localhost:8080/history");
-            nlohmann::json j = nlohmann::json::parse(history);
-            vector<GameRecord> records = j.get<vector<GameRecord>>();
-            show_history(records);
+            if (history.empty()) {
+                cout << "Failed to call GET" << endl;
+                cout << "Please turn on Server" << endl;
+            } else {
+                nlohmann::json j = nlohmann::json::parse(history);
+                vector<GameRecord> records = j.get<vector<GameRecord>>();
+                show_history(records);
             }
+        }
                 break;
             case 3:
                 cout << "To be continue\n";

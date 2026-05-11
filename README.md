@@ -1,112 +1,102 @@
 # Blackjack (C++)
 
-A feature-rich console-based Blackjack game written in C++ with balance tracking, split, double down, surrender, and insurance.
+Console-based Blackjack game written in C++. Supports full casino rules and optionally saves game history to a Spring Boot backend.
 
 ## Features
 
-- 3-deck shoe with automatic reshuffle when < 25% cards remain
-- **Hit**, **Stand**, **Split** (up to 4 times), **Double Down**, **Surrender**, **Insurance**
+- 3-deck shoe, reshuffles when < 25% cards remain
+- Hit, Stand, Split (up to 4 times), Double Down, Surrender, Insurance
 - Balance tracking & deposit system
-- Dealer follows standard casino rules (stand on 17)
-- Blackjack pays 1.5×
+- Dealer stands on 17, Blackjack pays 1.5x
+- Game history saved via REST API (optional)
 
 ## Requirements
 
-- **g++** with C++14 support (MinGW recommended on Windows)
-- MinGW install path: `C:/mingw` (used by `compile_flags.txt`)
+- **g++** with C++14 support — install via [MSYS2](https://www.msys2.org/) (UCRT64)
+- **libcurl** — required for API communication
 
-> If you don't have MinGW, download it from [winlibs.com](https://winlibs.com/) or install via MSYS2.
+Install both with MSYS2:
+```bash
+pacman -S mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-curl
+```
 
-## How to Compile
-
-Open a terminal (Git Bash, MSYS2, or any shell with `g++` on your PATH) in the project root and run:
+## Compile & Run
 
 ```bash
-g++ -std=c++14 -Iinclude -o output/blackjack.exe main.cpp src/Dealer.cpp src/Deck.cpp src/Hand.cpp src/Player.cpp src/game.cpp src/input.cpp
+g++ main.cpp src/*.cpp -Iinclude -L. -lcurl -o blackjack.exe
 ```
-
-Or use a one-liner that picks up all source files automatically:
 
 ```bash
-g++ -std=c++14 -Iinclude -o output/blackjack.exe main.cpp src/*.cpp
+./blackjack.exe
 ```
-
-## How to Run
-
-After compiling, run the executable:
-
-```bash
-./output/blackjack.exe
-```
-
-Or on Windows Command Prompt:
-
-```cmd
-output\blackjack.exe
-```
-
-A pre-built executable is also available at `output/blackjack.exe`.
 
 ## How to Play
 
-1. At the main menu, select an option:
-   | Key | Action |
-   |-----|--------|
-   | 1 | Play Blackjack |
-   | 5 | Deposit chips |
-   | 6 | Check balance |
-   | 9 | Exit |
+Enter your starting balance when prompted, then use the menu:
 
-2. Place your bet when prompted.
+| Option | Action |
+|--------|--------|
+| 1 | Play Blackjack |
+| 2 | View game history (requires API) |
+| 5 | Deposit chips |
+| 6 | Check balance |
+| 9 | Exit |
 
-3. During a hand, choose from the available actions:
-   | Action | Description |
-   |--------|-------------|
-   | Hit | Draw another card |
-   | Stand | Keep your current hand |
-   | Split | Split two equal-value cards (max 4 splits) |
-   | Double Down | Double your bet, receive one more card |
-   | Surrender | Forfeit the hand, lose only 50% of your bet |
-   | Insurance | Side bet when dealer shows an Ace; pays 2:1 if dealer has blackjack |
+During a hand:
+
+| Action | Description |
+|--------|-------------|
+| Hit | Draw another card |
+| Stand | Keep current hand |
+| Split | Split two equal-value cards (max 4 times) |
+| Double Down | Double bet, receive one more card |
+| Surrender | Forfeit hand, lose only 50% of bet |
+| Insurance | Side bet when dealer shows Ace; pays 2:1 if dealer has Blackjack |
+
+## API Backend (Optional)
+
+The game can save session data to a Spring Boot REST API at `http://localhost:8080`.
+
+- `POST /save` — saves game session after each round
+- `GET /history` — retrieves all saved sessions
+
+If the backend is not running, the game prints `Failed to save` and continues normally.
+
+See [black_jack_API/](black_jack_API/) for the Spring Boot project.
 
 ## Project Structure
 
 ```
 Blackjack/
-├── main.cpp            # Entry point
+├── main.cpp
 ├── include/            # Header files
 │   ├── card.h
 │   ├── Deck.h
 │   ├── Hand.h
 │   ├── Player.h
 │   ├── Dealer.h
-│   ├── game.h
-│   └── input.h
-├── src/                # Implementation files
+│   ├── service.h
+│   ├── input.h
+│   ├── saving.h
+│   ├── APIclient.h
+│   ├── Gamerecord.h
+│   └── json.hpp
+├── src/                # Source files
 │   ├── Deck.cpp
 │   ├── Hand.cpp
 │   ├── Player.cpp
 │   ├── Dealer.cpp
-│   ├── game.cpp
-│   └── input.cpp
-├── output/             # Compiled executable
-│   └── blackjack.exe
-├── data/               # Player & config data
+│   ├── service.cpp
+│   ├── input.cpp
+│   ├── saving.cpp
+│   ├── APIclient.cpp
+│   └── Gamerecord.cpp
+├── data/               # Config files
 ├── docs/               # Documentation
-│   ├── RULES.md        # Full blackjack rules reference
-│   └── DATA_SCHEMA.md  # Data file schema
-└── compile_flags.txt   # Compiler flags for IDE tooling
+│   ├── RULES.md
+│   └── DATA_SCHEMA.md
+├── black_jack_API/     # Spring Boot backend
+└── compile_flags.txt
 ```
 
-## Game Rules Summary
-
-| Rule | Value |
-|------|-------|
-| Decks in shoe | 3 |
-| Blackjack payout | 1.5× bet |
-| Dealer stands on | 17 |
-| Max splits | 4 |
-| Insurance | Available when dealer shows Ace |
-| Surrender | Available on first two cards |
-
-See [docs/RULES.md](docs/RULES.md) for the full rules reference.
+See [docs/RULES.md](docs/RULES.md) for full game rules and [docs/DATA_SCHEMA.md](docs/DATA_SCHEMA.md) for the saved data format.

@@ -7,6 +7,10 @@ import com.API.black_jack.service.Gameservice;
 
 import java.util.List;
 
+import org.apache.catalina.connector.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,13 +25,15 @@ public class Game_Controller {
     }
 
     @PostMapping("/save")
-    public data_Game save(@RequestBody String rawJson) {
-        return this.gameservice.add_game(rawJson);
+    public ResponseEntity<data_Game> save(@RequestBody String rawJson) {
+        data_Game game= this.gameservice.add_game(rawJson);
+        return ResponseEntity.status(HttpStatus.CREATED).body(game);
         
     }
     @GetMapping("/history")
-    public List<data_Game> get_all_history(){
-        return this.gameservice.get_data_game();
+    public ResponseEntity<List<data_Game>> get_all_history(){
+        List<data_Game> game_history=this.gameservice.get_data_game();
+        return ResponseEntity.ok(game_history);
     }
     
 }

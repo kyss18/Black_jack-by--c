@@ -5,7 +5,8 @@ using namespace std;
 Deck::Deck() {
     need_shuffle = false;
 
-    for (int d = 0; d < 3; d++) {
+    for (int d = 0; d < 3; d++)     
+     {
         for (auto& suit : suits) {
             for (auto& rank : ranks) {
 

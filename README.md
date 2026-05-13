@@ -38,8 +38,8 @@ Enter your starting balance when prompted, then use the menu:
 |--------|--------|
 | 1 | Play Blackjack |
 | 2 | View game history (requires API) |
-| 5 | Deposit chips |
-| 6 | Check balance |
+| 3 | Deposit chips |
+| 4 | Check balance |
 | 9 | Exit |
 
 During a hand:

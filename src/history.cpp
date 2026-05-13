@@ -45,9 +45,7 @@ void show_history(vector<GameRecord> records) {
         printf("  | Balance  : %.1f\n", r.jsonData.player.balance);
         printf("  | Insurance: %.1f\n", r.jsonData.player.insurance);
         printf("  | Surrender: %s\n", r.jsonData.player.surrender ? "Yes" : "No");
-        printf("  | Total Earn: %.1f  |  Total Loss: %.1f\n",
-               r.jsonData.player.totalearn,
-               r.jsonData.player.totalloss);
+        
 
         // PLAYER HANDS
         for (int i = 0; i < r.jsonData.player.hand.size(); i++) {

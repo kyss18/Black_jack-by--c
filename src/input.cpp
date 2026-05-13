@@ -83,8 +83,8 @@ void show_menu() {
     cout << "  " << thin << "\n";
     cout << "  |  [1]  Play                            |\n";
     cout << "  |  [2]  History                         |\n";
-    cout << "  |  [5]  Deposit                         |\n";
-    cout << "  |  [6]  Check Balance                   |\n";
+    cout << "  |  [3]  Deposit                         |\n";
+    cout << "  |  [4]  Check Balance                   |\n";
     cout << "  " << thin << "\n";
     cout << "  |  [9]  Exit                            |\n";
     cout << "  " << thick << "\n";
@@ -111,30 +111,20 @@ void show_menu() {
             } else {
                 nlohmann::json j = nlohmann::json::parse(history);
                 vector<GameRecord> records = j.get<vector<GameRecord>>();
+                cout<<"200: Ok"<<endl;
                 show_history(records);
             }
         }
                 break;
-            case 3:
-                cout << "To be continue\n";
-                break;
-            case 4:
-                cout << "To be continue\n";
-                break;
-            case 5: {
+            
+            case 3: {
                 deposit(player);
             } break;
-            case 6: {
+            case 4: {
                 cout << "\n-----------------------------\n" << endl;
                 cout << "Your balance:" << player.get_balance() << "$" << endl;
                 cout << "\n-----------------------------\n" << endl;
             } break;
-            case 7:
-                cout << "To be continue\n";
-                break;
-            case 8:
-                cout << "To be continue\n";
-                break;
             case 9:
                 return;
             default:

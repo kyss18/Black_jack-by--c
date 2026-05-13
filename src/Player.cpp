@@ -17,8 +17,6 @@ void Player::set_bet_amount(int i) {
     cout << "  |            P L A C E   B E T          |\n";
     cout << "  " << thick << "\n";
     printf("  |  Balance : $%-26.1f|\n", balance);
-    cout << "  " << thin << "\n";
-    cout << "  |  Enter 0 to cancel                    |\n";
     cout << "  " << thick << "\n";
 
     do {

@@ -25,9 +25,11 @@ public class data_Game {
     
     @Column(unique = true)
    private String gameSession = UUID.randomUUID().toString().substring(0, 8);
+
     @JsonRawValue
     @Column(columnDefinition = "LONGTEXT")
     private String jsonData;
+    
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

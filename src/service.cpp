@@ -353,9 +353,9 @@ void compare_result(Dealer dealer, Player& player, int bet_amount) {
     if (player.get_hands_size() > 1) {
         cout << "  |          T O T A L S                  |\n";
         cout << "  " << thin << "\n";
-        printf("  |  Total Earn : $%-23.1f|\n", player.get_earn());
-        printf("  |  Total Loss : $%-23.1f|\n", player.get_loss());
-        printf("  |  NET        : $%-23.1f|\n", player.get_net());
+        printf("  |  Total Earn : $%-23d|\n", player.get_earn());
+        printf("  |  Total Loss : $%-23d|\n", player.get_loss());
+        printf("  |  NET        : $%-23d|\n", player.get_net());
         cout << "  " << thick << "\n";
     }
 }
@@ -381,12 +381,12 @@ void put_cards_back(Deck& d, Player& player, Dealer& dealer) {
 
 void play_game(Player& player) {
     Balance balance;
-    balance.starting_balance=player.get_balance();
     Deck d;
     d.shuffle();
     Dealer dealer;
     while (true) {
         if (player.get_balance() > 0) {
+            balance.starting_balance=player.get_balance();
             system("cls");
             Hand player_hand;
             player.reset_hand();
